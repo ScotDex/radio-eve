@@ -1,0 +1,10 @@
+services:
+  radio:
+    image: savonet/liquidsoap:v2.4.5
+    command: ["/radio/radio.liq"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./radio:/radio:ro
+      - ./music:/music:ro
+      - ./out:/out
