@@ -2,9 +2,15 @@ services:
   radio:
     image: savonet/liquidsoap:v2.4.5
     command: ["/radio/radio.liq"]
+    restart: unless-stopped
     ports:
       - "8000:8000"
     volumes:
       - ./radio:/radio:ro
       - ./music:/music:ro
-      - ./out:/out
+    environment:
+      - TWITCH_KEY=${TWITCH_KEY}
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
