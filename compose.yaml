@@ -3,7 +3,7 @@ services:
     image: savonet/liquidsoap:v2.4.5
     command: ["/radio/radio.liq"]
     restart: unless-stopped
-    cpus: "1.0"
+    cpus: 1.0
     mem_limit: 768m
     ports:
       - "8000:8000"
