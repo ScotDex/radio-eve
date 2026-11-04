@@ -1,6 +1,6 @@
 services:
   radio:
-    image: linuxserver/ffmpeg:latest
+    image: linuxserver/ffmpeg:9.0.2
     command: >
       -re -stream_loop -1 -i /radio/stitched.mp4
       -re -stream_loop -1 -i /music/mix.m4a
