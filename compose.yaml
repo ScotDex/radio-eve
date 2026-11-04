@@ -1,17 +1,18 @@
 services:
   radio:
-    image: savonet/liquidsoap:v2.4.5
-    command: ["/radio/radio.liq"]
+    image: linuxserver/ffmpeg:latest
+    command: >
+      -re -stream_loop -1 -i /radio/stitched.mp4
+      -re -stream_loop -1 -i /music/mix.m4a
+      -map 0:v -map 1:a
+      -c copy
+      -f flv rtmp://live.twitch.tv/app/${TWITCH_KEY}
     restart: unless-stopped
-    cpus: 1.0
-    mem_limit: 768m
-    ports:
-      - "8000:8000"
+    cpus: 0.5
+    mem_limit: 256m
     volumes:
       - ./radio:/radio:ro
       - ./music:/music:ro
-    environment:
-      - TWITCH_KEY=${TWITCH_KEY}
     logging:
       options:
         max-size: "10m"
